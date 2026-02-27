@@ -2,7 +2,7 @@
 <ul>
   {% for x in myList %}
   <li>
-    <a href="articles/{{x.id}}">
+    <a href="{{x.getAbsoluteUrl}}">
       <p>{{x.title}} - {{x.content}}</p>
     </a>
   </li>

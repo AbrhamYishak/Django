@@ -15,3 +15,4 @@ def slugify_article(instance,newSlug=None):
             slug = f'{slug}-{qs.count()+1}'
         return slugify_article(instance,slug)
     instance.slug = slug
+    return instance

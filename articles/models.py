@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.db.models.signals import pre_save, post_save
 from .utils import slugify_article
+from django.urls import reverse
 class Article(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True,blank=True,null=True)
@@ -9,6 +10,9 @@ class Article(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     publish = models.DateTimeField(auto_now=False,auto_now_add=False,default=timezone.now,null=True,blank=True)
+
+    def getAbsoluteUrl(self):
+        return reverse("article-detail",kwargs={"slug":self.slug})
 
 def articlePreSave(instance,*args,**kwargs):
     if not instance.slug:
